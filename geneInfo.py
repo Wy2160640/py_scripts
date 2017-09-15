@@ -34,15 +34,18 @@ def conn_ucsc(args):
 	return geneInfo
 	
 		
-def run_geneInfo(geneInfo):
+def run_geneInfo(geneInfo, args):
 	if not geneInfo:
 		print "Please check your input, it's not a geneSymbol."
 		exit()
 	chrom,strand,starts,ends,genesymbol,description=geneInfo[0],geneInfo[1],geneInfo[2].strip(',').split(','),geneInfo[3].strip(',').split(','),geneInfo[4],geneInfo[5]
-	for start,end in zip(starts, ends):
-		print "{0}\t{1}\t{2}\t{3}".format(chrom,strand,start,end)
+	if args.outfile:
+		[args.outfile.write("{0}\t{1}\t{2}\t{3}\n".format(chrom,strand,start,end)) for start,end in zip(starts, ends)]
+	else:
+		for start,end in zip(starts, ends):
+			print "{0}\t{1}\t{2}\t{3}".format(chrom,strand,start,end)
 			
 if __name__=='__main__':
 	args=get_opt()
 	geneInfo=conn_ucsc(args)
-	run_geneInfo(geneInfo)
+	run_geneInfo(geneInfo, args)
