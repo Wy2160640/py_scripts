@@ -40,10 +40,10 @@ def run_geneInfo(geneInfo, args):
 		exit()
 	chrom,strand,starts,ends,genesymbol,description=geneInfo[0],geneInfo[1],geneInfo[2].strip(',').split(','),geneInfo[3].strip(',').split(','),geneInfo[4],geneInfo[5]
 	if args.outfile:
-		[args.outfile.write("{0}\t{1}\t{2}\t{3}\n".format(chrom,strand,start,end)) for start,end in zip(starts, ends)]
+		[args.outfile.write("{0}\t{1}\t{2}\t{3}\n".format(chrom,start,end,strand)) for start,end in zip(starts, ends)]
 	else:
 		for start,end in zip(starts, ends):
-			print "{0}\t{1}\t{2}\t{3}".format(chrom,strand,start,end)
+			print "{0}\t{1}\t{2}\t{3}".format(chrom,start,end,strand)
 			
 if __name__=='__main__':
 	args=get_opt()
