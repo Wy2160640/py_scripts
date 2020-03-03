@@ -74,6 +74,8 @@ def wrap_blat(query, db):
     db, db is each either a .fa, .nib or .2bit file
     """
     blat = os.path.join(os.path.dirname(__file__), 'bin', 'blat')
+    if not os.path.exists(blat):
+        blat = 'blat'
     cmd = "{blat} -noHead -t=dna -q=dna -out=blast8  -minIdentity=0 {db} {query} stdout".format(blat=blat, db=db, query=query)
     stdout, stderr = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
     content = stdout.decode()
