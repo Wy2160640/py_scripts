@@ -165,7 +165,7 @@ def main():
     alignments = wrap_blat(outfasta, params.db)
     os.remove(outfasta)
     #print(alignments)
-    filter_blat(alignments, out)
+    filter_blat(alignments, params.out)
 
 
 if __name__ == "__main__":
