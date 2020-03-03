@@ -162,8 +162,8 @@ def main():
     outfasta = os.path.join("/tmp", salt)
     Reader(params.query, params.window, params.step, outfasta).run()
 
-    os.remove(outfasta)
     alignments = wrap_blat(outfasta, params.db)
+    os.remove(outfasta)
     #print(alignments)
     filter_blat(alignments, out)
 
